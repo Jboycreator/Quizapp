@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page title</title>
+    <style >
+        body{
+        padding :0px ;
+        margin :0px ;
+        
+Background: linear-gradient(to left, blueviolet,white);
+display:flex ;
+  flex-direction :column ;
+  justify-content :center ;
+  align-items :center ;
+  margin-top:100px ;
+}
+  .container {
+      display :grid ;
+      grid-template-columns :repeat (2, auto);
+      background-color :aqua ;
+      gap :10px ;
+      Border-radius :50px ;
+      box-shadow : 0px 0px 56px deeppink  ;
+      
+      padding :50px ;
+      Height :100hv;
+      Width :100wv ;
+  }
+ .que-stion{
+     display :inline ;
+     justify-content :center ;
+     align-items :center ;
+     text-align :center ;
+     text-wrap:break-word ;
+    // text-decoration :underline;
+     color : blueviolet ;
+ }
+ 
+.btn-grid {
+    display :flex ;
+    flex-direction :column ;
+    justify-content :center ;
+    align-items :center ;
+    padding :10px ;
+    font-size :30px ;
+    text-align :center ;
+    gap :10px ;
+    
+}
+
+.btn{
+    Background-color :white ;
+    box-shadow :0px 0px 10px gray;
+    border:none ;
+    Border-radius :10px ;
+    padding :10px ;
+    
+}
+.btn:hover {
+    Background-color :blueviolet ;
+    color :white ;
+    
+}
+.hide {
+    display:none ;
+}
+  
+     
+    </style>
+    
+</head>
+<body>
+    <h1></h1>
+    
+    <div class="container">
+        
+        
+        <div id="question" class="que-stion hide">question center </div>
+        
+        <div id="container-btn" class="btn-grid hide">
+           <!--<button class ="btn">answer</button>
+            <button class ="btn">answer</button>
+            <button class ="btn">answer</button>
+            <button class ="btn">answer</button>-->
+            
+        </div>
+        
+        <!--button center -->
+        
+        <button id="start-challenge" class="style-sc btn">start</button>
+        
+        
+        <button id="next" class="next-answer btn hide">next</button>
+        
+        
+        <button id="restart" class="next-answer btn hide">restart</button>
+        
+        
+        
+    </div>
+    
+    
+    <script>
+        const allQuestions = [
+            {
+            question:'how are you', 
+             choices:['me', 'how','and', 'try'], 
+             answer:'how'
+              }, 
+                {
+            question:'2 * 4', 
+             choices:['8', '7','18', '6'], 
+             answer:'8'
+              }, 
+                   {
+            question:'8 * 9', 
+             choices:['8', '54','18', '6'], 
+             answer:'54'
+              }  
+        ]
+        
+        const startButton = document.getElementById('start-challenge')
+       const containerButton = document.getElementById('container-btn')
+       const containAnswer = document.getElementById('question')
+        startButton.addEventListener('click', () => {
+         startButton.classList.add('hide')
+     containAnswer.classList.remove('hide')
+         containerButton.classList.remove('hide') 
+        });
+        
+        let currentQuestion = 0
+        let computerMove 
+        
+        myFunction();
+        
+        function myFunction(){
+         const containAnswer = document.getElementById('question')
+         
+         containAnswer.textContent = allQuestions[currentQuestion].question 
+         
+         const containerButton = document.getElementById('container-btn')
+         
+     containerButton.innerHTML = ''; allQuestions[currentQuestion].choices.forEach(choice => {
+             const button = document.createElement('button');
+      button.textContent = choice;
+      button.classList.add('btn')
+      button.onclick = () => checkAnswer(choice);
+containerButton.appendChild(button); 
+         });
+        }
+        let score = 0;
+        
+        function checkAnswer(choice){
+            if(choice === allQuestions[currentQuestion].answer){
+               document.getElementById('next').classList.remove('hide')
+               score++;
+               
+            }
+        }
+        
+    function selectAnswer(){
+if (allQuestions.length > currentQuestion + 1) {
+        currentQuestion++;
+        myFunction();
+       
+    } else {
+        finalResults(); 
+    }
+}
+function finalResults(){
+    const containerButton = document.getElementById('container-btn');
+   containerButton.innerText = ' you finish'
+    document.getElementById("question").textContent = `Quiz completed! Your score is ${score}`;
+
+resetButton();
+//startButton.innerText = 'Restart'
+// startButton.classList.remove('hide')
+}
+const restartButton= document.getElementById('restart')
+
+ restartButton.onclick = () => {
+    
+    currentQuestion = 0;
+    selectAnswer();
+    
+    
+    
+    restartButton.classList.add('hide')
+} 
+ 
+function resetButton(){
+ restartButton.classList.remove('hide')
+}
+
+  
+  const nextButton =document.getElementById('next')
+  
+document.getElementById('next').addEventListener('click', () => {
+     selectAnswer();
+     nextButton.classList.add('hide')
+     
+  
+     
+})
+
+        
+        
+        
+        
+        
+    </script>
+</body>
+</html>
