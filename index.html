@@ -50,6 +50,10 @@ display:flex ;
     
 }
 
+.dying1 {
+    Background-color :pink;
+}
+
 .btn{
     Background-color :white ;
     box-shadow :0px 0px 10px gray;
@@ -72,10 +76,10 @@ display:flex ;
     
 </head>
 <body>
-    <h1></h1>
     
-    <div class="container">
-        
+    
+    <div id="demo" class="container">
+        <p id="box" class="hide"></p>
         
         <div id="question" class="que-stion hide">question center </div>
         
@@ -103,9 +107,7 @@ display:flex ;
     
     
     <script>
-        const allQuestions = [
-            {
-            question:'capital city of tanzania', 
+        const allQuestions = [  {question:'capital city of tanzania', 
              choices:['new York ', 'afrika','dodoma', 'tanga'], 
              answer:'dodoma'
               }, 
@@ -135,6 +137,7 @@ display:flex ;
              answer:'artificial intelligence'
               }  
         ]
+
         
         const startButton = document.getElementById('start-challenge')
        const containerButton = document.getElementById('container-btn')
@@ -168,11 +171,30 @@ containerButton.appendChild(button);
         let score = 0;
         
         function checkAnswer(choice){
+       
+        const boxHeader= document.getElementById('box');
+         
+        
             if(choice === allQuestions[currentQuestion].answer){
                document.getElementById('next').classList.remove('hide')
                score++;
                
+            } else {
+                myFunction2();
             }
+        }
+        
+        function myFunction2(){
+        const boxHeader= document.getElementById('box');
+        const dying = document.getElementById('demo');
+            alert ('wrong answer');
+                const sum = document.createElement('h1')
+       sum.style.color = "red";
+      dying.classList.add('dying')
+      // sum.innerText = 'wrong answer';
+       //boxHeader.classList.remove('hide')
+       boxHeader.appendChild(sum);
+       selectAnswer();
         }
         
     function selectAnswer(){
@@ -199,7 +221,7 @@ const restartButton= document.getElementById('restart')
     
     currentQuestion = 0;
     myFunction();
-    score = 0;
+    score = 0
     
     
     
@@ -215,7 +237,7 @@ function resetButton(){
   
 document.getElementById('next').addEventListener('click', () => {
      selectAnswer();
-     nextButton.classList.add('hide')
+     nextButton.classList.add('hide') 
      
   
      
