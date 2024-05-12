@@ -16,10 +16,6 @@ display:flex ;
   align-items :center ;
   margin-top:100px ;
 }
-.container2{
-    text-align :center ;
-    Color :deeppink;
- } 
   .container {
       display :grid ;
       grid-template-columns :repeat (2, auto);
@@ -66,7 +62,16 @@ display:flex ;
     padding :10px ;
     
 }
-.btn:hover {
+.btn1{
+    Background-color :white ;
+    box-shadow :0px 0px 10px gray;
+    border:none ;
+    Border-radius :10px ;
+    padding :10px ;
+    top:0px ;
+    
+} 
+.btn,.btn1:hover {
     Background-color :blueviolet ;
     color :white ;
     
@@ -74,15 +79,21 @@ display:flex ;
 .hide {
     display:none ;
 }
-  
+ .why{
+     display :flex ;
+     Flex-direction :row ;
+     justify-content:space-between;
+     gap :5px ;
+ }
      
     </style>
     
 </head>
 <body>
     
-    <h1 class="container2 " >AMANI MAKALI
-</h1>
+   
+    
+    
     <div id="demo" class="container">
         <p id="box" class="hide"></p>
         
@@ -108,9 +119,12 @@ display:flex ;
         
         
         
-    </div>
+    </div >
     
+    <p>don't forget to like🙏🙏🙏</p>
+    <div class="why" ><button class ="btn1">like</button> <p >👍</p><p id="show">0</p>
     
+    </div >
     <script>
         const allQuestions = [  {question:'capital city of tanzania', 
              choices:['new York ', 'afrika','dodoma', 'tanga'], 
@@ -143,6 +157,29 @@ display:flex ;
               }  
         ]
 
+        let count = 0;
+        
+        
+         
+        const countButton = document.querySelector('.btn1')
+        
+        countButton.addEventListener('click', () => {
+        const showLiker = document.getElementById('show')
+            showLiker.textContent = count += 1;
+            localStorage.setItem('you', count); })
+            
+  // localStorage.setItem('you', count);
+       // window.onload = myFunction6;
+       
+        function myFunction6(){
+        const showLiker = document.getElementById('show')
+            const stress = localStorage.getItem('you');
+            if(stress){
+                showLiker.textContent = stress;
+            }
+        }
+         myFunction6();
+       
         
         const startButton = document.getElementById('start-challenge')
        const containerButton = document.getElementById('container-btn')
@@ -154,7 +191,7 @@ display:flex ;
         });
         
         let currentQuestion = 0
-        let computerMove 
+        let loses = 0
         
         myFunction();
         
@@ -193,9 +230,10 @@ containerButton.appendChild(button);
         const boxHeader= document.getElementById('box');
         const dying = document.getElementById('demo');
             alert ('wrong answer');
-  nextButton.classList.add('hide')
-    score = 0;
                 const sum = document.createElement('h1')
+               nextButton.classList.add('hide') 
+               loses += 1;
+               score = 0;
        sum.style.color = "red";
       dying.classList.add('dying')
       // sum.innerText = 'wrong answer';
@@ -216,7 +254,7 @@ if (allQuestions.length > currentQuestion + 1) {
 function finalResults(){
     const containerButton = document.getElementById('container-btn');
    containerButton.innerText = ' you finish'
-    document.getElementById("question").textContent = `Quiz completed! Your score is ${score}`;
+    document.getElementById("question").textContent = `Quiz completed! Your score is ${score} your lose is ${loses}`;
 
 resetButton();
 //startButton.innerText = 'Restart'
@@ -248,11 +286,11 @@ document.getElementById('next').addEventListener('click', () => {
      
   
      
-})
+});
 
         
         
-        
+        alert('dont forget to like please 🙏🙏🙏🙏')
         
         
     </script>
